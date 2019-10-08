@@ -1,12 +1,12 @@
-const test = require('tape').test;
-const zlib = require('zlib');
-const requestLib = require('needle');
-
+import * as tap from 'tap';
+import * as zlib from 'zlib';
+import * as requestLib from 'needle';
 import * as _ from 'lodash';
 import * as sinon from 'sinon';
-
 import * as cli from '../src/cli/commands';
 import subProcess = require('../src/lib/sub-process');
+
+const { test } = tap;
 
 test('Make sure that target is sent correctly', async (t) => {
   const subProcessStub = sinon.stub(subProcess, 'execute');
