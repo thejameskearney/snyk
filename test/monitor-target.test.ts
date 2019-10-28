@@ -1,6 +1,6 @@
-const test = require('tape').test;
-const zlib = require('zlib');
-const requestLib = require('needle');
+import { test } from 'tap';
+import * as zlib from 'zlib';
+import * as requestLib from 'needle';
 
 import * as _ from 'lodash';
 import * as sinon from 'sinon';
@@ -83,9 +83,9 @@ async function getMonitorRequestDataAndSpy() {
 
   await cli.monitor();
 
-  const data = JSON.parse(
-    zlib.gunzipSync(requestSpy.getCall(0).args[2]).toString(),
-  );
+  const body = requestSpy.getCall(0).args[2].toString();
+  const gunzipBody = zlib.gunzipSync(body).toString();
+  const data = JSON.parse(gunzipBody);
 
   return {
     data,
